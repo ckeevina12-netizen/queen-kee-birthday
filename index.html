@@ -1,0 +1,430 @@
+<!--
+  Beginner-friendly, mobile-first header + hero
+  ✨ Pastel yellow + pink + purple theme
+  🌙 Includes Dark Mode (auto + toggle)
+  ✅ No frameworks required
+  ✅ Accessible (keyboard + screen readers)
+  ✅ Mobile menu toggle (hamburger)
+  ✅ Easy to customize
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile-First Header + Hero</title>
+  <style>
+    /* ====== Reset ====== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ====== Theme ====== */
+    :root {
+      --bg: #FFF8E7;
+      --bg-accent: #FDE2E4;
+      --bg-accent-2: #EDE9FE;
+      --surface: #FFFFFF;
+      --text: #3F3A2E;
+      --muted: #7C6F91;
+      --border: #F1D4E5;
+      --focus: #C084FC;
+      --cta: #FBCFE8;
+      --cta-text: #4A2C3A;
+      --icon: #5B2D5E;
+      --max: 1100px;
+      --pad: 16px;
+      --radius: 16px;
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0B0B10;
+      --bg-accent: #1A1020;
+      --bg-accent-2: #101827;
+      --surface: #11121A;
+      --text: #F5F2FF;
+      --muted: #CBBDE8;
+      --border: #2A2140;
+      --focus: #F0ABFC;
+      --cta: #A78BFA;
+      --cta-text: #0B0B10;
+      --icon: #F0ABFC;
+    }
+
+    /* ====== Header ====== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: linear-gradient(90deg, var(--bg), var(--bg-accent-2));
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 12px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--bg-accent), var(--bg-accent-2));
+      border: 1px solid var(--border);
+      color: var(--icon);
+      font-weight: 900;
+    }
+
+    .nav { display: none; gap: 18px; }
+    .nav a { padding: 8px 12px; border-radius: var(--radius); }
+    .nav a:hover { background: var(--bg-accent); }
+
+    .cta { display: none; padding: 10px 16px; border-radius: 999px; background: var(--cta); font-weight: 800; }
+
+    .icon-btn {
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: grid; place-items: center;
+    }
+
+    .right-controls { display: flex; gap: 10px; }
+
+    @media (min-width: 768px) {
+      .nav { display: flex; }
+      .cta { display: inline-flex; }
+    }
+
+    /* ====== HERO ====== */
+    .hero {
+      text-align: center;
+      padding: clamp(48px, 8vw, 96px) var(--pad);
+      background:
+        radial-gradient(800px 400px at 20% 10%, var(--bg-accent), transparent 70%),
+        radial-gradient(800px 400px at 80% 0%, var(--bg-accent-2), transparent 70%),
+        linear-gradient(180deg, var(--bg), var(--bg-accent-2));
+    }
+
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      gap: 24px;
+      justify-items: center;
+    }
+
+    .pill {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: clamp(16px, 2.5vw, 18px);
+      line-height: 1.6;
+      max-width: 60ch;
+      color: var(--muted);
+      margin: 0 auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .btn {
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cta), var(--bg-accent-2));
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+    }
+
+    /* ====== Cute photos ====== */
+    .photo-strip {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .photo-card {
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      border-radius: 20px;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 12px 28px color-mix(in srgb, #000 10%, transparent);
+      transform: rotate(var(--r, 0deg));
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-2px) rotate(var(--r, 0deg));
+      box-shadow: 0 16px 36px color-mix(in srgb, #000 14%, transparent);
+    }
+
+    .photo-card:nth-child(1) { --r: -2deg; }
+    .photo-card:nth-child(2) { --r: 1deg; }
+    .photo-card:nth-child(3) { --r: -1deg; }
+
+    .photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+      border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+    }
+
+    .photo-caption {
+      display: block;
+      margin-top: 10px;
+      font-weight: 850;
+      letter-spacing: 0.1px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .tiny-note {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Stack photos on small screens */
+    @media (max-width: 700px) {
+      .photo-strip { grid-template-columns: 1fr; }
+      .photo { aspect-ratio: 4 / 3; }
+      .photo-card { transform: none; }
+      .photo-card:hover { transform: translateY(-2px); }
+    }
+
+    /* ====== Lightbox ====== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      z-index: 50;
+      padding: 18px;
+    }
+
+    .lightbox[aria-hidden="false"] { display: grid; }
+
+    .lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: color-mix(in srgb, #000 70%, transparent);
+    }
+
+    .lightbox-content {
+      position: relative;
+      width: min(820px, 96vw);
+      margin: 0;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      overflow: hidden;
+      box-shadow: 0 20px 60px color-mix(in srgb, #000 35%, transparent);
+    }
+
+    .lightbox-content img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #000;
+      max-height: 72vh;
+      object-fit: contain;
+    }
+
+    .lightbox-content figcaption {
+      padding: 12px 14px 14px;
+      color: var(--muted);
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* ====== Content ====== */
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 48px var(--pad);
+      text-align: center;
+    }
+
+    main h2 { margin-top: 48px; }
+    main p { max-width: 60ch; margin: 12px auto 0; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <span class="logo-mark">👑</span>
+      <span>Queen Kee’s Birthday RSVP</span>
+    </a>
+
+    
+
+    <div class="right-controls">
+      
+      <button class="icon-btn" id="themeToggle">🌙</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="pill">🥞 Birthday brunch • RSVP below • Louisville, KY</div>
+    <h1>Birthday brunch at Big Bad Breakfast 🎉🥞</h1>
+    <p>
+      Come celebrate my 20th birthday with brunch at Big Bad Breakfast! 💕
+      Join me in Louisville, KY at <strong>12:30 PM</strong> for good food,
+      laughs, and birthday vibes. Please RSVP so I can save your seat 💌
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://form.typeform.com/to/Dh9HjLMB" target="_blank" rel="noopener">RSVP here 💌</a>
+    </div>
+
+    <!-- Cute photo strip (your photos) -->
+    <div class="photo-strip" aria-label="Photos">
+      <button class="photo-card" type="button" aria-label="Open photo 1">
+        <img class="photo" src="IMG_1805.jpeg" alt="Birthday brunch photo 1" loading="lazy" />
+        <span class="photo-caption">brunch fit 💕</span>
+      </button>
+
+      <button class="photo-card" type="button" aria-label="Open photo 2">
+        <img class="photo" src="FullSizeRender.jpeg" alt="Birthday brunch photo 2" loading="lazy" />
+        <span class="photo-caption">it’s my birthdayyy 🎂</span>
+      </button>
+
+      <button class="photo-card" type="button" aria-label="Open photo 3">
+        <img class="photo" src="FullSizeRender (1).jpeg" alt="Birthday brunch photo 3" loading="lazy" />
+        <span class="photo-caption">see y’all at 12:30 🥞</span>
+      </button>
+    </div>
+
+    <p class="tiny-note">
+      To use your own pics: put the images in the <strong>same folder</strong> as this HTML file (or update the <code>src</code> paths).
+      These are currently set to: <code>IMG_1805.jpeg</code>, <code>FullSizeRender.jpeg</code>, <code>FullSizeRender (1).jpeg</code>.
+    </p>
+
+    <!-- Lightbox (click a photo to open) -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="lightbox-backdrop" data-close></div>
+      <figure class="lightbox-content" role="dialog" aria-modal="true" aria-label="Photo preview">
+        <button class="lightbox-close" type="button" aria-label="Close" data-close>✕</button>
+        <img id="lightboxImg" alt="" />
+        <figcaption id="lightboxCap"></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  // ===== Dark mode toggle =====
+  const toggle = document.getElementById('themeToggle');
+  toggle.addEventListener('click', () => {
+    const root = document.documentElement;
+    const dark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    toggle.textContent = dark ? '🌙' : '☀️';
+  });
+
+  // ===== Lightbox for photos =====
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCap = document.getElementById('lightboxCap');
+  const photoCards = document.querySelectorAll('.photo-card');
+
+  function openLightbox(imgEl, captionText) {
+    lightboxImg.src = imgEl.currentSrc || imgEl.src;
+    lightboxImg.alt = imgEl.alt || 'Photo';
+    lightboxCap.textContent = captionText || '';
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  photoCards.forEach((card) => {
+    const img = card.querySelector('img');
+    const cap = card.querySelector('.photo-caption')?.textContent;
+    card.addEventListener('click', () => openLightbox(img, cap));
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target.matches('[data-close]')) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+</body>
+</html>
+
